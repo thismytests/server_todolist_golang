@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  db:
+    # // todo ... Mykolai Litvin ... will be discussed
+    image: library/postgres:12.6
+    restart: always
+    environment:
+      POSTGRES_DB: $POSTGRES_DATABASE_NAME
+      # So you don't have to use root, but you can if you like
+      POSTGRES_USER: $POSTGRES_DATABASE_USERNAME
+      # You can use whatever password you like
+      POSTGRES_PASSWORD: $POSTGRES_DATABASE_PASSWORD
+      # Password for root access
+    ports:
+      - ${POSTGRES_DATABASE_PORT}:${POSTGRES_DATABASE_PORT}
+
+  server_go:
+    depends_on:
+      - db
+    #    network_mode: host
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+    build:
+      dockerfile: Dockerfile
+      context: ../
+    restart: always
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+
+networks:
+  backend:

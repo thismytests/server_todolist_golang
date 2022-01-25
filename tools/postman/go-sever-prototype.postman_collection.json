@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "c95e20b3-f4ac-4b5f-a969-882c92ffd1ae",
+		"name": "go-sever-prototype",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "login",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "login",
+									"value": "login",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/auth/login?login=login&password=password",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "login"
+								},
+								{
+									"key": "password",
+									"value": "password"
+								}
+							]
+						},
+						"description": "postman-echo.com/get"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "protected routes",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {},
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/test/133",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"test",
+								"133"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "name",
+									"disabled": true
+								}
+							]
+						},
+						"description": "postman-echo.com/get"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "unprotected routes",
+			"item": [
+				{
+					"name": "todolist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Id\": \"TesteId\",\n    \"Text\": \"TestedText\",\n    \"IsSelected\": \"false\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/todolist/22",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"todolist",
+								"22"
+							]
+						},
+						"description": "postman-echo.com/get"
+					},
+					"response": []
+				},
+				{
+					"name": "todolist",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Title",
+								"value": "Title",
+								"type": "text",
+								"description": "Title",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Id\": \"TesteId\",\n    \"Text\": \"TestedText\",\n    \"IsSelected\": \"false\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/todolist",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"todolist"
+							]
+						},
+						"description": "postman-echo.com/get"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
